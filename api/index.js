@@ -31,6 +31,12 @@ app.use(
   })
 );
 
+app.get("/verify", (req,res) => {
+  res.status(201).json({
+    msg:"Success"
+  })
+})
+
 app.post("/register", register);
 app.post("/login", login);
 
