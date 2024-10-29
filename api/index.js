@@ -13,10 +13,10 @@ const register = require("./controllers/register.js");
 const login = require("./controllers/login.js");
 const User = require("./models/User.js");
 const Place = require("./models/Place.js");
-const Booking = require("./models/Booking.js");
+const Booking = require("./models/Booking.js"); 
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); 
 dotenv.config();
 
 app.use(cookieParser());
@@ -36,6 +36,7 @@ app.post("/login", login);
 
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
+  console.log(token)
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
       if (err) throw err;
@@ -90,18 +91,18 @@ app.post("/upload", photosUploadMiddleware.array("photos", 100), (req, res) => {
     fs.renameSync(path, newPath);
     uploadedFiles.push(newPath.replace("uploads", ""));
     // console.log(uploadedFiles)
-  }
+  } 
   res.json(uploadedFiles);
 });
 
 app.post("/places", (req, res) => {
   const { token } = req.cookies;
-  const {
+  const { 
     title,
     address,
-    addedPhotos,
-    description,
-    perks,
+    addedPhotos,  
+    description, 
+    perks, 
     extraInfo,
     checkIn,
     checkOut,
@@ -182,7 +183,7 @@ app.put("/places", async (req, res) => {
 
       await placeDoc.save();
 
-      res.json(placeDoc);
+      res.json(placeDoc); 
     }
   });
 });
